@@ -10,7 +10,8 @@ class User(BaseModel):
     index: int
     guid: str
     isActive: bool
-    balance: float
+    # присутствует символ $
+    balance: str
     picture: str
     age: int
     eyeColor: str
@@ -21,11 +22,14 @@ class User(BaseModel):
     phone: str
     address: str
     about: str
-    registered: datetime
+    # неправильный datetime?
+    registered: str
     latitude: float
     longitude: float
     tags: list[str]
     friends: list[dict]
     greeting: str
     favoriteFruit: str
-    books: list[Book]
+    # поставить необязательность
+    books: list[Book] = []
+

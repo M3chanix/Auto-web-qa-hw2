@@ -1,13 +1,12 @@
-from datetime import datetime
-from typing import List
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 # Создать юзера с помощью dataclass
 # 
 
 class Book(BaseModel):
-    title: str
-    author: str
-    genre: str
-    pages: int
-    publisher: str
+    title: str = Field(alias='Title')
+    author: str = Field(alias='Author')
+    genre: str = Field(alias='Genre')
+    pages: int = Field(alias='Pages')
+    publisher: str = Field(alias='Publisher')
+
