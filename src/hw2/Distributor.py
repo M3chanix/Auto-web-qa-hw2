@@ -19,7 +19,8 @@ class Distributor():
         modulo = books_number % len(self._users)
         # возвращает [{user: user1, books_num: 3}, ]
         dist = list({'user': u, 'books_num': int_number} for u in self._users)
-        dist[0]['books_num'] += modulo
+        for i in range(modulo):
+            dist[i]['books_num'] += 1
         return dist
 
     def book_generator(self, num):
