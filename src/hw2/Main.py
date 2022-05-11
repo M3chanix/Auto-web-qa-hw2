@@ -1,36 +1,30 @@
-from hw2.User import User
 from hw2.Distributor import Distributor
-from pydantic import parse_file_as
-import json
+from hw2.UserList import UserList
 
 def main():
 # Прочитать json в строку
-    users = parse_file_as(list[User],'users.json')
-
+    user_list = UserList.parse_file('users.json')
 
 # Создать distributor
-    dist = Distributor(users, 'books.csv')
+    dist = Distributor(user_list, 'books.csv')
     dist.distribute()
 
 # Записать в json
 # name, gender, address, age, books: title, author, pages, genre
 
-    include = {
+    include = {'__root__': {'__all__' :
+            {
             'name': True,
             'gender': True,
             'address': True,
             'age': True,
             'books': {'__all__': {'title', 'author', 'pages', 'genre'}}
-            }
+            }}}
 
-    result_list = []
-    result_list = [user.dict(include = include) for user in users]
 
     with open('result.json', 'w') as file:
-        file.write(json.dumps(result_list))
-
-# Добавить indentation, определить порядок полей
-
+        file.write(user_list.json(include = include, indent=4))
 
 if __name__ == '__main__':
     main()
+

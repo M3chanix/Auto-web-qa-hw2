@@ -1,4 +1,4 @@
 pyproject.toml
 tests/
 *.csv
-*.json
+users.json

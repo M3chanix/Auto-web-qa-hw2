@@ -1,11 +1,11 @@
-from hw2.User import User
 from hw2.Book import Book
+from hw2.UserList import UserList
 import csv
 
 
 class Distributor():
 
-    def __init__(self, users: list[User], books_file: str):
+    def __init__(self, users: UserList, books_file: str):
         self._users = users
         self._books_file = books_file
 
@@ -15,10 +15,10 @@ class Distributor():
         with open(self._books_file, 'r') as file:
             books_number = sum(1 for line in file) - 1 # первая строка - titles
         # разбить это количество по пользователям
-        int_number = books_number // len(self._users)
-        modulo = books_number % len(self._users)
+        int_number = books_number // len(self._users.__root__)
+        modulo = books_number % len(self._users.__root__)
         # возвращает [{user: user1, books_num: 3}, ]
-        dist = list({'user': u, 'books_num': int_number} for u in self._users)
+        dist = list({'user': u, 'books_num': int_number} for u in self._users.__root__)
         for i in range(modulo):
             dist[i]['books_num'] += 1
         return dist
